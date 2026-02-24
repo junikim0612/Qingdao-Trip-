@@ -95,7 +95,7 @@
   .day-col:last-child { padding-right: 0; }
 
   .day-label {
-    display: flex; align-items: baseline; gap: 7px;
+    display: flex; align-items: center; gap: 7px;
     margin-bottom: 8px; padding-bottom: 6px;
     border-bottom: 2px solid var(--navy);
   }
@@ -103,10 +103,10 @@
     font-family: 'DM Serif Display', serif;
     font-size: 26px; color: var(--navy); line-height: 1;
   }
-  .day-date-text { font-size: 11px; font-weight: 600; color: var(--navy); }
+  .day-date-text { font-size: 11px; font-weight: 600; color: var(--navy); line-height: 1.2; }
   .day-weekday {
     font-family: 'Outfit', sans-serif;
-    font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+    font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;
   }
 
   .day-theme {
@@ -124,16 +124,18 @@
     display: flex; gap: 0; align-items: flex-start; padding: 2.5px 0;
   }
   .sched-time-area {
-    display: flex; align-items: baseline; gap: 4px;
-    min-width: 80px; flex-shrink: 0; padding-top: 1px;
+    display: flex; align-items: baseline;
+    min-width: 80px; width: 80px; flex-shrink: 0; padding-top: 1px;
   }
   .sched-time {
     font-family: 'Outfit', sans-serif;
     font-size: 10px; font-weight: 500; color: var(--muted);
+    min-width: 34px;
   }
   .sched-badge {
     font-size: 8px; font-weight: 700; letter-spacing: 0.3px;
     padding: 1px 5px; border-radius: 2px; white-space: nowrap;
+    text-align: center; min-width: 30px;
   }
   .badge-meal { background: rgba(196,120,90,0.15); color: var(--meal); }
   .badge-spot { background: rgba(90,143,122,0.15); color: var(--spot); }
@@ -143,6 +145,11 @@
   .sched-content { flex: 1; }
   .sched-text { font-size: 11px; font-weight: 500; color: var(--text); line-height: 1.4; }
   .sched-sub { font-size: 9.5px; font-weight: 400; color: var(--muted); }
+  .sched-cn {
+    font-size: 10px; color: #888; font-weight: 400;
+    margin-top: 1px; user-select: all; cursor: text;
+    letter-spacing: 0.5px;
+  }
 
   hr.sched-divider { border: none; border-top: 1px dashed #E0D9CC; margin: 4px 0; }
 
@@ -251,14 +258,14 @@
       <div class="sched-list">
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span></div><div class="sched-content"><div class="sched-text">기상 · 조식 (리서)</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:00</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">잔교로 출발</div><div class="sched-sub">30분</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:30</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">잔교 / 중산로 / 은어항</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:30</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">잔교 / 중산로 / 은어항</div><div class="sched-cn">栈桥 / 中山路 / 银鱼巷</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:30</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">메이다얼 식사</div><div class="sched-sub">가지튀김 유명 🍆</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">14:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">성미카엘 성당</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">14:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">성미카엘 성당</div><div class="sched-cn">圣弥厄尔主教座堂</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">15:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 · 휴식</div></div></div>
         <hr class="sched-divider">
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">17:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">완상청 5층 (루위)</div><div class="sched-sub">생선요리 유명 🐟</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">완상청 투어</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">19:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">54광장 레이저쇼 ✨</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">완상청 투어</div><div class="sched-cn">青岛万象城</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">19:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">54광장 레이저쇼 ✨</div><div class="sched-cn">五四广场</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">21:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">요트선착장 · 양꼬치 🍺</div></div></div>
       </div>
@@ -273,13 +280,13 @@
       <div class="day-theme">맥주박물관 · 씨모루 · 불야성</div>
       <div class="sched-list">
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span></div><div class="sched-content"><div class="sched-text">기상 · 조식 (리서)</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">칭다오 맥주박물관 🍻</div><div class="sched-sub">이동 30분</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">칭다오 맥주박물관 🍻</div><div class="sched-cn">青岛啤酒博物馆</div><div class="sched-sub">이동 30분</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">주변 점심</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">13:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">씨모루 시장</div><div class="sched-sub">가지튀김 유명 🍆</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">13:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">씨모루 시장</div><div class="sched-cn">即墨路小商品市场</div><div class="sched-sub">가지튀김 유명 🍆</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">14:30</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 · 휴식</div></div></div>
         <hr class="sched-divider">
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">17:30</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">불야성 or 완상청 쇼핑</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">불야성 투어 & 저녁</div><div class="sched-sub">생선요리 유명 🐟</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">불야성 투어 & 저녁</div><div class="sched-cn">明月山海间不夜城</div><div class="sched-sub">생선요리 유명 🐟</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 (취침)</div></div></div>
       </div>
     </div>
