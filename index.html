@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>칭다오 여행 일정표</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --navy: #0F1923;
+    --gold: #C9A96E;
+    --gold-light: #E2CFA0;
+    --cream: #FBF8F2;
+    --white: #fff;
+    --text: #1A1A1A;
+    --muted: #8A8A8A;
+    --meal: #C4785A;
+    --spot: #5A8F7A;
+    --move: #5A7FA0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .poster {
+    width: 1080px; max-width: 100%;
+    background: var(--cream);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    padding: 28px 36px 22px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 16px; position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute;
+    top: 0; right: 0; bottom: 0; width: 40%;
+    background: radial-gradient(ellipse at 80% 50%, rgba(201,169,110,0.12) 0%, transparent 70%);
+  }
+  .header-left { position: relative; }
+  .header-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px; font-weight: 500;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px; color: var(--white); line-height: 1;
+  }
+  .header-title span {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px; font-weight: 300;
+    color: rgba(255,255,255,0.4); margin-left: 10px; letter-spacing: 3px;
+  }
+  .header-right {
+    position: relative; display: flex; gap: 20px; align-items: center;
+  }
+  .flight-badge {
+    text-align: center; padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
+  }
+  .flight-badge-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 8px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
+  }
+  .flight-badge-route {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px; color: var(--white); margin: 1px 0;
+  }
+  .flight-badge-time { font-size: 10px; color: rgba(255,255,255,0.35); }
+  .header-info { text-align: right; position: relative; }
+  .header-date { font-family: 'Outfit', sans-serif; font-size: 12px; color: rgba(255,255,255,0.55); }
+  .header-duration { font-size: 11px; color: var(--gold); font-weight: 500; margin-top: 1px; }
+
+  /* BODY */
+  .body {
+    padding: 20px 28px 22px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .day-col {
+    padding: 0 12px;
+    border-right: 1px solid #E8E2D6;
+  }
+  .day-col:last-child { border-right: none; }
+  .day-col:first-child { padding-left: 0; }
+  .day-col:last-child { padding-right: 0; }
+
+  .day-label {
+    display: flex; align-items: baseline; gap: 7px;
+    margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .day-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px; color: var(--navy); line-height: 1;
+  }
+  .day-date-text { font-size: 11px; font-weight: 600; color: var(--navy); }
+  .day-weekday {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .day-theme {
+    display: inline-block;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    color: var(--white);
+    background: var(--navy);
+    padding: 3px 9px; border-radius: 3px; margin-bottom: 10px;
+  }
+
+  /* SCHEDULE */
+  .sched-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .sched-item {
+    display: flex; gap: 0; align-items: flex-start; padding: 2.5px 0;
+  }
+  .sched-time-area {
+    display: flex; align-items: baseline; gap: 4px;
+    min-width: 80px; flex-shrink: 0; padding-top: 1px;
+  }
+  .sched-time {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px; font-weight: 500; color: var(--muted);
+  }
+  .sched-badge {
+    font-size: 8px; font-weight: 700; letter-spacing: 0.3px;
+    padding: 1px 5px; border-radius: 2px; white-space: nowrap;
+  }
+  .badge-meal { background: rgba(196,120,90,0.15); color: var(--meal); }
+  .badge-spot { background: rgba(90,143,122,0.15); color: var(--spot); }
+  .badge-move { background: rgba(90,127,160,0.15); color: var(--move); }
+  .badge-flight { background: rgba(201,169,110,0.15); color: var(--gold); }
+
+  .sched-content { flex: 1; }
+  .sched-text { font-size: 11px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .sched-sub { font-size: 9.5px; font-weight: 400; color: var(--muted); }
+
+  hr.sched-divider { border: none; border-top: 1px dashed #E0D9CC; margin: 4px 0; }
+
+  .flight-strip {
+    background: var(--navy); border-radius: 5px;
+    padding: 6px 8px; margin: 4px 0;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .fs-city { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--white); }
+  .fs-arrow { color: var(--gold); font-family: 'Outfit', sans-serif; font-size: 9px; }
+
+  /* FOOTER */
+  .footer-bar {
+    background: var(--navy); padding: 12px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-legend { display: flex; gap: 16px; }
+  .legend-item {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 9px; color: rgba(255,255,255,0.5);
+  }
+  .legend-badge {
+    font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 2px;
+  }
+  .footer-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px; color: var(--gold-light);
+  }
+
+  @media (max-width: 900px) {
+    .body { grid-template-columns: repeat(2, 1fr); gap: 16px 0; }
+    .day-col:nth-child(2) { border-right: none; }
+    .day-col:nth-child(3) { padding-left: 0; }
+  }
+  @media (max-width: 520px) {
+    .body { grid-template-columns: 1fr; gap: 16px; }
+    .day-col { border-right: none !important; border-bottom: 1px solid #E8E2D6; padding: 0 0 12px !important; }
+    .day-col:last-child { border-bottom: none; }
+    .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .header-right { align-self: flex-start; flex-wrap: wrap; }
+    .header-info { text-align: left; }
+    .footer-bar { flex-direction: column; gap: 6px; }
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .poster { box-shadow: none; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-eyebrow">Travel Itinerary · 3N4D</div>
+      <div class="header-title">Qingdao <span>칭다오 여행</span></div>
+    </div>
+    <div class="header-right">
+      <div class="flight-badge">
+        <div class="flight-badge-label">가는편</div>
+        <div class="flight-badge-route">ICN → TAO</div>
+        <div class="flight-badge-time">15:25 → 16:15 (현지)</div>
+      </div>
+      <div class="flight-badge">
+        <div class="flight-badge-label">오는편</div>
+        <div class="flight-badge-route">TAO → ICN</div>
+        <div class="flight-badge-time">17:15 → 19:45</div>
+      </div>
+      <div class="header-info">
+        <div class="header-date">2025. 3. 10 — 13</div>
+        <div class="header-duration">Jin Air ✈</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- DAY 1 -->
+    <div class="day-col">
+      <div class="day-label">
+        <div class="day-num">01</div>
+        <div style="display:flex;flex-direction:column"><div class="day-date-text">3월 10일</div><div class="day-weekday">Tuesday</div></div>
+      </div>
+      <div class="day-theme">출발 & 도착</div>
+      <div class="sched-list">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">08:00</span></div><div class="sched-content"><div class="sched-text">기상</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">홍성 집 출발</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:30</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">인천공항 2터미널 출발</div><div class="sched-sub">약 2시간+</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">11:30</span></div><div class="sched-content"><div class="sched-text">인천공항 도착</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:00</span></div><div class="sched-content"><div class="sched-text">보딩</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">13:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">출국심사 & 공항 점심</div></div></div>
+        <hr class="sched-divider">
+        <div class="flight-strip"><div class="fs-city">ICN</div><div class="fs-arrow">15:25 ─ ✈ ─ 16:15</div><div class="fs-city">TAO</div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">17:30</span></div><div class="sched-content"><div class="sched-text">입국심사 & 숙소이동</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:30</span></div><div class="sched-content"><div class="sched-text">숙소 도착 · 체크인</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">19:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">주변 저녁식사</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:30</span></div><div class="sched-content"><div class="sched-text">편의점 · 마무리</div></div></div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-col">
+      <div class="day-label">
+        <div class="day-num">02</div>
+        <div style="display:flex;flex-direction:column"><div class="day-date-text">3월 11일</div><div class="day-weekday">Wednesday</div></div>
+      </div>
+      <div class="day-theme">잔교 · 완상청 · 54광장</div>
+      <div class="sched-list">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span></div><div class="sched-content"><div class="sched-text">기상 · 조식 (리서)</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:00</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">잔교로 출발</div><div class="sched-sub">30분</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:30</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">잔교 / 중산로 / 은어항</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:30</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">메이다얼 식사</div><div class="sched-sub">가지튀김 유명 🍆</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">14:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">성미카엘 성당</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">15:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 · 휴식</div></div></div>
+        <hr class="sched-divider">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">17:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">완상청 5층 (루위)</div><div class="sched-sub">생선요리 유명 🐟</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">완상청 투어</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">19:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">54광장 레이저쇼 ✨</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">21:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">요트선착장 · 양꼬치 🍺</div></div></div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-col">
+      <div class="day-label">
+        <div class="day-num">03</div>
+        <div style="display:flex;flex-direction:column"><div class="day-date-text">3월 12일</div><div class="day-weekday">Thursday</div></div>
+      </div>
+      <div class="day-theme">맥주박물관 · 씨모루 · 불야성</div>
+      <div class="sched-list">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span></div><div class="sched-content"><div class="sched-text">기상 · 조식 (리서)</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">10:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">칭다오 맥주박물관 🍻</div><div class="sched-sub">이동 30분</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">주변 점심</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">13:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">씨모루 시장</div><div class="sched-sub">가지튀김 유명 🍆</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">14:30</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 · 휴식</div></div></div>
+        <hr class="sched-divider">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">17:30</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">불야성 or 완상청 쇼핑</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">불야성 투어 & 저녁</div><div class="sched-sub">생선요리 유명 🐟</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀 (취침)</div></div></div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-col">
+      <div class="day-label">
+        <div class="day-num">04</div>
+        <div style="display:flex;flex-direction:column"><div class="day-date-text">3월 13일</div><div class="day-weekday">Friday</div></div>
+      </div>
+      <div class="day-theme">귀국</div>
+      <div class="sched-list">
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">09:00</span></div><div class="sched-content"><div class="sched-text">기상 · 조식 (리서)</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:00</span></div><div class="sched-content"><div class="sched-text">체크아웃</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">12:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">주변 점심 식사</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">13:30</span><span class="sched-badge badge-move">이동</span></div><div class="sched-content"><div class="sched-text">칭다오 공항 출발</div><div class="sched-sub">약 1시간+</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">15:00</span></div><div class="sched-content"><div class="sched-text">공항 보딩</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">16:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">출국심사 & 간식</div></div></div>
+        <hr class="sched-divider">
+        <div class="flight-strip"><div class="fs-city">TAO</div><div class="fs-arrow">17:15 ─ ✈ ─ 19:45</div><div class="fs-city">ICN</div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:30</span></div><div class="sched-content"><div class="sched-text">입국심사 & 수화물</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">21:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">늦은 저녁 (이동 중)</div><div class="sched-sub">이동 약 2시간+</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">22:30</span></div><div class="sched-content"><div class="sched-text">내포 집 도착</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">23:00</span></div><div class="sched-content"><div class="sched-text">아버지 모셔다 드리기</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-legend">
+      <div class="legend-item"><span class="legend-badge sched-badge badge-meal">식사</span></div>
+      <div class="legend-item"><span class="legend-badge sched-badge badge-spot">관광</span></div>
+      <div class="legend-item"><span class="legend-badge sched-badge badge-move">이동</span></div>
+      <div class="legend-item"><span class="legend-badge sched-badge badge-flight">비행</span></div>
+    </div>
+    <div class="footer-tagline">Have a great trip! 🍺</div>
+  </div>
+</div>
+</body>
+</html>
