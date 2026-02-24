@@ -27,14 +27,130 @@
     display: flex; align-items: center; justify-content: center;
     padding: 20px;
   }
+
+  /* INTRO OVERLAY */
+  .intro-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    transition: opacity 1s ease, visibility 1s ease;
+  }
+  .intro-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .intro-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 30% 40%, rgba(201,169,110,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 300px at 70% 60%, rgba(90,127,160,0.06) 0%, transparent 70%);
+  }
+  .intro-content {
+    position: relative;
+    text-align: center;
+    animation: introFade 1.5s ease-out;
+  }
+  @keyframes introFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .intro-emoji {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .intro-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 10vw, 80px);
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .intro-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+  }
+  .intro-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 14px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .intro-btn:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .intro-btn svg {
+    width: 16px; height: 16px;
+    fill: currentColor;
+  }
+  .intro-date {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    margin-top: 24px;
+  }
+
+  /* MUSIC CONTROL */
+  .music-ctrl {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--navy);
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .music-ctrl.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .music-ctrl:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* POSTER */
   .poster {
     width: 1080px; max-width: 100%;
     background: var(--cream);
     border-radius: 16px; overflow: hidden;
     box-shadow: 0 40px 80px rgba(0,0,0,0.5);
   }
-
-  /* HEADER */
   .header {
     background: var(--navy);
     padding: 28px 36px 22px;
@@ -80,8 +196,6 @@
   .header-info { text-align: right; position: relative; }
   .header-date { font-family: 'Outfit', sans-serif; font-size: 12px; color: rgba(255,255,255,0.55); }
   .header-duration { font-size: 11px; color: var(--gold); font-weight: 500; margin-top: 1px; }
-
-  /* BODY */
   .body {
     padding: 20px 28px 22px;
     display: grid; grid-template-columns: repeat(4, 1fr);
@@ -93,7 +207,6 @@
   .day-col:last-child { border-right: none; }
   .day-col:first-child { padding-left: 0; }
   .day-col:last-child { padding-right: 0; }
-
   .day-label {
     display: flex; align-items: center; gap: 7px;
     margin-bottom: 8px; padding-bottom: 6px;
@@ -108,7 +221,6 @@
     font-family: 'Outfit', sans-serif;
     font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;
   }
-
   .day-theme {
     display: inline-block;
     font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
@@ -116,10 +228,7 @@
     background: var(--navy);
     padding: 3px 9px; border-radius: 3px; margin-bottom: 10px;
   }
-
-  /* SCHEDULE */
   .sched-list { display: flex; flex-direction: column; gap: 2px; }
-
   .sched-item {
     display: flex; gap: 0; align-items: flex-start; padding: 2.5px 0;
   }
@@ -141,7 +250,6 @@
   .badge-spot { background: rgba(90,143,122,0.15); color: var(--spot); }
   .badge-move { background: rgba(90,127,160,0.15); color: var(--move); }
   .badge-flight { background: rgba(201,169,110,0.15); color: var(--gold); }
-
   .sched-content { flex: 1; }
   .sched-text { font-size: 11px; font-weight: 500; color: var(--text); line-height: 1.4; }
   .sched-sub { font-size: 9.5px; font-weight: 400; color: var(--muted); }
@@ -150,9 +258,7 @@
     margin-top: 1px; user-select: all; cursor: text;
     letter-spacing: 0.5px;
   }
-
   hr.sched-divider { border: none; border-top: 1px dashed #E0D9CC; margin: 4px 0; }
-
   .flight-strip {
     background: var(--navy); border-radius: 5px;
     padding: 6px 8px; margin: 4px 0;
@@ -160,8 +266,6 @@
   }
   .fs-city { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--white); }
   .fs-arrow { color: var(--gold); font-family: 'Outfit', sans-serif; font-size: 9px; }
-
-  /* FOOTER */
   .footer-bar {
     background: var(--navy); padding: 12px 28px;
     display: flex; align-items: center; justify-content: space-between;
@@ -196,10 +300,31 @@
   @media print {
     body { background: white; padding: 0; }
     .poster { box-shadow: none; border-radius: 0; }
+    .intro-overlay, .music-ctrl { display: none !important; }
   }
 </style>
 </head>
 <body>
+
+<!-- INTRO OVERLAY -->
+<div class="intro-overlay" id="intro">
+  <div class="intro-content">
+    <div class="intro-emoji">✈️</div>
+    <div class="intro-eyebrow">Travel Itinerary</div>
+    <div class="intro-title">Qingdao</div>
+    <div class="intro-sub">칭다오 여행</div>
+    <button class="intro-btn" id="startBtn" onclick="startTrip()">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      여행 시작하기
+    </button>
+    <div class="intro-date">2025. 3. 10 — 13 · 3박 4일</div>
+  </div>
+</div>
+
+<!-- MUSIC CONTROL -->
+<div class="music-ctrl" id="musicBtn" onclick="toggleMusic()">♪</div>
+
+<!-- POSTER -->
 <div class="poster">
   <div class="header">
     <div class="header-left">
@@ -267,7 +392,7 @@
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">18:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">완상청 투어</div><div class="sched-cn">青岛万象城</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">19:00</span><span class="sched-badge badge-spot">관광</span></div><div class="sched-content"><div class="sched-text">54광장 레이저쇼 ✨</div><div class="sched-cn">五四广场</div></div></div>
         <div class="sched-item"><div class="sched-time-area"><span class="sched-time">20:00</span></div><div class="sched-content"><div class="sched-text">숙소 복귀</div></div></div>
-        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">21:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">요트선착장 · 양꼬치 🍺</div></div></div>
+        <div class="sched-item"><div class="sched-time-area"><span class="sched-time">21:00</span><span class="sched-badge badge-meal">식사</span></div><div class="sched-content"><div class="sched-text">요트선착장 · 양꼬치 🍺</div><div class="sched-cn">青岛奥林匹克帆船中心</div></div></div>
       </div>
     </div>
 
@@ -325,5 +450,182 @@
     <div class="footer-tagline">Have a great trip! 🍺</div>
   </div>
 </div>
+
+<script>
+// ===== PIANO JAZZ BGM (Web Audio API) =====
+let audioCtx, masterGain, isPlaying = false, loopId = null;
+
+function createPianoNote(freq, startTime, duration, velocity = 0.3) {
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const osc3 = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  // Piano-like timbre: fundamental + harmonics
+  osc1.type = 'sine';
+  osc1.frequency.value = freq;
+  osc2.type = 'sine';
+  osc2.frequency.value = freq * 2;
+  osc3.type = 'sine';
+  osc3.frequency.value = freq * 3;
+
+  const g1 = audioCtx.createGain();
+  const g2 = audioCtx.createGain();
+  const g3 = audioCtx.createGain();
+  g1.gain.value = velocity;
+  g2.gain.value = velocity * 0.4;
+  g3.gain.value = velocity * 0.15;
+
+  filter.type = 'lowpass';
+  filter.frequency.value = 3000;
+  filter.Q.value = 1;
+
+  osc1.connect(g1); g1.connect(filter);
+  osc2.connect(g2); g2.connect(filter);
+  osc3.connect(g3); g3.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+
+  // Piano envelope: fast attack, quick decay, sustain, release
+  gain.gain.setValueAtTime(0, startTime);
+  gain.gain.linearRampToValueAtTime(velocity, startTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(velocity * 0.5, startTime + 0.1);
+  gain.gain.exponentialRampToValueAtTime(velocity * 0.3, startTime + duration * 0.5);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+  osc1.start(startTime);
+  osc2.start(startTime);
+  osc3.start(startTime);
+  osc1.stop(startTime + duration + 0.1);
+  osc2.stop(startTime + duration + 0.1);
+  osc3.stop(startTime + duration + 0.1);
+}
+
+function noteToFreq(note) {
+  const notes = { 'C':0,'Db':1,'D':2,'Eb':3,'E':4,'F':5,'Gb':6,'G':7,'Ab':8,'A':9,'Bb':10,'B':11 };
+  const match = note.match(/^([A-G]b?)(\d)$/);
+  const semitone = notes[match[1]];
+  const octave = parseInt(match[2]);
+  return 440 * Math.pow(2, (semitone - 9) / 12 + (octave - 4));
+}
+
+function playChord(notes, startTime, duration, vel = 0.15) {
+  notes.forEach(n => {
+    createPianoNote(noteToFreq(n), startTime, duration, vel + Math.random() * 0.03);
+  });
+}
+
+function playMelodyNote(note, startTime, duration, vel = 0.22) {
+  createPianoNote(noteToFreq(note), startTime, duration, vel);
+}
+
+function scheduleLoop() {
+  const now = audioCtx.currentTime + 0.1;
+  const bpm = 95;
+  const beat = 60 / bpm;
+
+  // Jazz chord progression: Dm7 - G7 - Cmaj7 - Am7 - Dm7 - G7 - Cmaj7 - Fmaj7
+  const chords = [
+    ['D3','F3','A3','C4'],    // Dm7
+    ['G3','B3','D4','F4'],    // G7
+    ['C3','E3','G3','B3'],    // Cmaj7
+    ['A3','C4','E4','G4'],    // Am7
+    ['D3','F3','A3','C4'],    // Dm7
+    ['G3','B3','D4','F4'],    // G7
+    ['C3','E3','G3','B3'],    // Cmaj7
+    ['F3','A3','C4','E4'],    // Fmaj7
+  ];
+
+  // Melodic phrases over the chords (jazzy, flowing)
+  const melodies = [
+    [{n:'F5',t:0,d:0.8},{n:'E5',t:1,d:0.5},{n:'D5',t:1.6,d:0.6},{n:'C5',t:2.4,d:1}],
+    [{n:'B4',t:0.2,d:0.6},{n:'D5',t:1,d:0.8},{n:'F5',t:2,d:0.5},{n:'E5',t:2.8,d:0.8}],
+    [{n:'E5',t:0,d:1},{n:'G5',t:1.2,d:0.5},{n:'E5',t:2,d:0.6},{n:'C5',t:2.8,d:1}],
+    [{n:'A4',t:0.3,d:0.7},{n:'C5',t:1.2,d:0.6},{n:'E5',t:2,d:0.8},{n:'D5',t:3,d:0.8}],
+    [{n:'D5',t:0,d:0.5},{n:'F5',t:0.6,d:0.6},{n:'A5',t:1.4,d:0.8},{n:'G5',t:2.4,d:1}],
+    [{n:'G5',t:0,d:0.6},{n:'F5',t:0.8,d:0.5},{n:'D5',t:1.5,d:0.7},{n:'B4',t:2.4,d:1}],
+    [{n:'C5',t:0.2,d:1},{n:'E5',t:1.5,d:0.6},{n:'G5',t:2.2,d:0.5},{n:'A5',t:3,d:0.8}],
+    [{n:'A5',t:0,d:0.7},{n:'G5',t:0.8,d:0.5},{n:'F5',t:1.5,d:0.6},{n:'E5',t:2.4,d:1.2}],
+  ];
+
+  chords.forEach((chord, i) => {
+    const barStart = now + i * beat * 4;
+
+    // Comping pattern: broken chord with swing feel
+    playChord(chord, barStart, beat * 2.5, 0.1);
+    playChord(chord, barStart + beat * 2.7, beat * 1.2, 0.08);
+
+    // Light bass note
+    const bass = chord[0].replace(/\d/, '2');
+    createPianoNote(noteToFreq(bass), barStart, beat * 3, 0.18);
+    createPianoNote(noteToFreq(bass), barStart + beat * 3, beat * 0.8, 0.12);
+
+    // Melody
+    if (melodies[i]) {
+      melodies[i].forEach(m => {
+        const vel = 0.18 + Math.random() * 0.06;
+        playMelodyNote(m.n, barStart + m.t * beat, m.d * beat, vel);
+      });
+    }
+  });
+
+  const loopDuration = chords.length * beat * 4 * 1000;
+  loopId = setTimeout(scheduleLoop, loopDuration - 200);
+}
+
+function startMusic() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.6;
+
+  // Subtle reverb via delay
+  const delay = audioCtx.createDelay();
+  delay.delayTime.value = 0.15;
+  const feedback = audioCtx.createGain();
+  feedback.gain.value = 0.2;
+  const delayGain = audioCtx.createGain();
+  delayGain.gain.value = 0.3;
+
+  masterGain.connect(audioCtx.destination);
+  masterGain.connect(delay);
+  delay.connect(feedback);
+  feedback.connect(delay);
+  delay.connect(delayGain);
+  delayGain.connect(audioCtx.destination);
+
+  isPlaying = true;
+  scheduleLoop();
+}
+
+function stopMusic() {
+  isPlaying = false;
+  if (loopId) clearTimeout(loopId);
+  if (audioCtx) {
+    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    setTimeout(() => { audioCtx.close(); audioCtx = null; }, 600);
+  }
+}
+
+function toggleMusic() {
+  const btn = document.getElementById('musicBtn');
+  if (isPlaying) {
+    stopMusic();
+    btn.textContent = '♪';
+    btn.style.opacity = '0.5';
+  } else {
+    startMusic();
+    btn.textContent = '♪';
+    btn.style.opacity = '1';
+  }
+}
+
+function startTrip() {
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('musicBtn').classList.add('show');
+  startMusic();
+}
+</script>
 </body>
 </html>
+
